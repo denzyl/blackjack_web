@@ -1,10 +1,12 @@
 require 'rubygems'
 require 'sinatra'
+require 'pry'
 
 set :sessions, true
 
 BLACKJACK_AMOUNT = 21
 DEALER_MIN_HIT = 17
+INITIAL_POT_AMOUNT = 500
 
 helpers do
   def calculate_total(cards)
@@ -102,7 +104,7 @@ get '/bet' do
 end
 
 post '/bet' do
-  if params[:bet_amount].nil || params[:bet_amount].to_i == 0
+  if params[:bet_amount].nil? || params[:bet_amount].to_i == 0
     @error = 'Must make a bet.'
     halt erb(:bet)
   elsif params[:bet_amount].to_i > session[:player_pot]
