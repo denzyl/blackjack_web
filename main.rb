@@ -155,7 +155,7 @@ end
 
 get '/game/dealer' do
   session[:turn] = 'dealer'
-  @show_hitstay = false
+  @show_hit_or_stay_buttons = false
 
   # decisions
   dealer_total = calculate_total(session[:dealer_cards])

@@ -45,12 +45,13 @@
     <% end %>
 
     <h5>
-      <%= session[:player_name] %> has $<%= session[:player_pot] %> and bet $<%= session[:player_bet] %> this round.</h5>
+      <%= session[:player_name] %> has $<%= session[:player_pot] %> and bet $<%= session[:player_bet] %> this round.
+    </h5>
   </div>
 
-  <p> What would you like to do? The value of your cards: <%= calculate_total(session[:player_cards]) %>
+<% if @show_hit_or_stay_buttons %>
 
-  <% if @show_hit_or_stay_buttons %>
+  <p> What would you like to do? The value of your cards: <%= calculate_total(session[:player_cards]) %>
     <form id="hit_form" action="/game/player/hit" method='post'>
       <input type="submit" class="btn btn-success" value="Hit" />
     </form>
