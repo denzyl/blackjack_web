@@ -27,7 +27,7 @@
       <% end %>
     <% end %>
 
-    <% if @show_hitstay %>
+    <% if @show_dealer_hit_button %>
       <p>
         <h5>Dealer has <%= calculate_total(session[:dealer_cards])%> and will hit. </h5>
         <form id="dealer_hit" action='/game/dealer/hit' method='post'>
@@ -50,9 +50,9 @@
 
   <p> What would you like to do? The value of your cards: <%= calculate_total(session[:player_cards]) %>
 
-  <% if @show_hitstay %>
-    <form id='hit_form' action="/game/player/hit" method="post">
-      <input type="submit" value="Hit" class="btn btn-success" />
+  <% if @show_hit_or_stay_buttons %>
+    <form id="hit_form" action="/game/player/hit" method='post'>
+      <input type="submit" class="btn btn-success" value="Hit" />
     </form>
     <form id='stay_form' action='/game/player/stay' method='post'>
       <input type="submit" value="Stay" class="btn btn-warning" />

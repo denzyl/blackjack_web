@@ -46,31 +46,31 @@ helpers do
               end
     end
 
-    "<img src='/images/cards/#{suit}_#{value}.jpg' class='card_iamge'>"
+    "<img src='/images/cards/#{suit}_#{value}.jpg' class='card_image'>"
   end
 
   def winner(msg)
     @play_again = true
-    @show_hitstay = false
+    @show_hit_or_stay_buttons = false
     session[:player_pot] = session[:player_pot] + session[:player_bet]
     @winner = "<strong>#{session[:player_name]} wins!</strong> #{msg}"
   end
 
   def loser(msg)
     @play_again = true
-    @show_hitstay = false
+    @show_hit_or_stay_buttons = false
     @loser = "<strong>#{session[:player_name]} loses!</strong> #{msg}"
   end
 
   def tie(msg)
     @play_again = true
-    @show_hitstay = false
+    @show_hit_or_stay_buttons = false
     @winner = "<strong>It's a tie!</strong> #{msg}"
   end
 end
 
 before do
-  @show_hitstay = true
+  @show_hit_or_stay_buttons = true
 end
 
 get '/' do
@@ -149,7 +149,7 @@ end
 
 post '/game/player/stay' do
   @success = "#{session[:player_name]} has chosen to stay."
-  @show_hitstay = false
+  @show_hit_or_stay_buttons = false
   redirect '/game/dealer'
 end
 
@@ -169,7 +169,7 @@ get '/game/dealer' do
     redirect '/game/compare'
   else
     # dealer hits
-    @show_hitstay = true
+    @show_dealer_hit_button = true
   end
 
   erb :game, layout: false
@@ -181,7 +181,7 @@ post '/game/dealer/hit' do
 end
 
 get '/game/compare' do
-  @show_hitstay = false
+  @show_hit_or_stay_buttons = false
 
   player_total = calculate_total(session[:player_cards])
   dealer_total = calculate_total(session[:dealer_cards])
