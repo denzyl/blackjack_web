@@ -59,6 +59,7 @@ helpers do
   def loser(msg)
     @play_again = true
     @show_hit_or_stay_buttons = false
+    session[:player_pot] = session[:player_pot] - session[:player_bet]
     @loser = "<strong>#{session[:player_name]} loses!</strong> #{msg}"
   end
 
