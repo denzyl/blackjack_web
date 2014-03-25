@@ -108,7 +108,8 @@ post '/bet' do
     @error = 'Must make a bet.'
     halt erb(:bet)
   elsif params[:bet_amount].to_i > session[:player_pot]
-    @error = "Bet amount cannot be greater than what you have ($#{session[:player_pot]}"
+    @error = "Bet amount cannot be greater than what
+    you have ($#{session[:player_pot]})"
     halt erb(:bet)
   else
     session[:player_bet] = params[:bet_amount].to_i
