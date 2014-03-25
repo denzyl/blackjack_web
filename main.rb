@@ -53,19 +53,19 @@ helpers do
     @play_again = true
     @show_hitstay = false
     session[:player_pot] = session[:player_pot] + session[:player_bet]
-    @success = "<strong>#{session[:player_name]} wins!</strong> #{msg}"
+    @winner = "<strong>#{session[:player_name]} wins!</strong> #{msg}"
   end
 
   def loser(msg)
     @play_again = true
     @show_hitstay = false
-    @error = "<strong>#{session[:player_name]} loses!</strong> #{msg}"
+    @loser = "<strong>#{session[:player_name]} loses!</strong> #{msg}"
   end
 
   def tie(msg)
     @play_again = true
     @show_hitstay = false
-    @success = "<strong>It's a tie!</strong> #{msg}"
+    @winner = "<strong>It's a tie!</strong> #{msg}"
   end
 end
 
@@ -82,7 +82,7 @@ get '/' do
 end
 
 get '/new_player' do
-  session[:player_pot] = 500
+  session[:player_pot] = INITIAL_POT_AMOUNT
   erb :new_player
 end
 
@@ -144,7 +144,7 @@ post '/game/player/hit' do
     loser("It looks like #{session[:player_name]} busted at #{player_total}.")
   end
 
-  erb :game
+  erb :game, layout: false
 end
 
 post '/game/player/stay' do
@@ -172,7 +172,7 @@ get '/game/dealer' do
     @show_hitstay = true
   end
 
-  erb :game
+  erb :game, layout: false
 end
 
 post '/game/dealer/hit' do
@@ -194,7 +194,7 @@ get '/game/compare' do
     tie("Both #{session[:player_name]} and the dealer stayed at #{player_total}.")
   end
 
-  erb :game
+  erb :game, layout: false
 end
 
 get '/game_over' do
